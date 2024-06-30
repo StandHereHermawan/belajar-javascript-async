@@ -1,0 +1,16 @@
+{
+    "errors": null,
+    "data": {
+        "nama": "Agung Krisna",
+        "alamat": {
+            "kecamatan": "Baleendah",
+            "kota": "Kabupaten Bandung",
+            "provinsi": "Jawa Barat"
+        },
+        "hobby": [
+            "Maen ke Paskal",
+            "Menggunakan Discord",
+            "Menggunakan Instagram"
+        ]
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "errors": null,
+    "data": {
+        "nama": "Thomas Teguh",
+        "alamat": {
+            "kecamatan": "Astana Anyar",
+            "kota": "Bandung",
+            "provinsi": "Jawa Barat"
+        },
+        "hobby": [
+            "Nonton F1",
+            "Menggunakan Discord",
+            "Menggunakan Instagram",
+            "Nonton WEC",
+            "Bermain WuWa"
+        ]
+    }
+}

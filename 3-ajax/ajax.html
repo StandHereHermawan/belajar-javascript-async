@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Membuat AJAX, JS Async</title>
+    </head>
+    <body>
+        <script>
+            /**
+             * Membuat AJAX
+             */
+            {
+                const ajax = new XMLHttpRequest();
+                ajax.open("GET", "api/hello.json");
+                // ajax.open('GET','http://localhost:8080/api/hello.json');
+                ajax.send();
+            }
+
+            // Coba-Coba
+            {
+                const ajaxAgung = new XMLHttpRequest();
+                ajaxAgung.open("GET", "api/agung.json");
+                ajaxAgung.send();
+
+                const ajaxThomas = new XMLHttpRequest();
+                ajaxThomas.open("GET", "api/thomas.json");
+                ajaxThomas.send();
+
+                const ajaxBagus = new XMLHttpRequest();
+                ajaxBagus.open("GET", "api/bagus.json");
+                ajaxBagus.send();
+            }
+        </script>
+    </body>
+</html>
