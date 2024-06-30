@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Callback, JS Async</title>
+    </head>
+    <body>
+        <hi id="header"></hi>
+        <script>
+            /**
+             * Set Interval
+             */
+            const setTime = () => {
+                const header = document.getElementById("header");
+                header.textContent = new Date().toString();
+            };
+
+            // Salah satu method Async
+            setInterval(setTime, 1000);
+            console.info(`Baris Program setelah method set Interval.`);
+            console.info(`Program Selesai.`);
+        </script>
+    </body>
+</html>

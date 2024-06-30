@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Callback, JS Async</title>
+    </head>
+    <body>
+        <script>
+            /**
+             * Set Timeout
+             */
+            const addElement = () => {
+                const header = document.createElement("h1");
+                header.textContent = "Arief Belajar JavaScript";
+
+                document.body.appendChild(header);
+            };
+
+            // Salah satu Method Async
+            setTimeout(addElement, 5000);
+            console.info(`Baris Program setelah method set timeout.`);
+            console.info(`Program Selesai.`);
+        </script>
+    </body>
+</html>
