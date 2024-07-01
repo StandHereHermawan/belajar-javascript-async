@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>State di AJAX, JS Async</title>
+    </head>
+    <body>
+        <script></script>
+        <h1 id="response"></h1>
+        <p id="konten"></p>
+        <script>
+            /**
+             * Ready State Change Event
+             */
+            function displayKonten(json) {
+                const konten = document.getElementById("konten");
+                konten.textContent =
+                    json.data.konten1 +
+                    json.data.konten2 +
+                    json.data.konten3 +
+                    json.data.konten4;
+            }
+
+            function displayKontenError(json) {
+                const header = document.getElementById("konten");
+                header.textContent = json.response;
+            }
+
+            function displayResponse(json) {
+                const header = document.getElementById("response");
+                header.textContent = json.response;
+            }
+
+            /**
+             * Response status di AJAX.
+             */
+            const ajax = new XMLHttpRequest();
+            // ajax.addEventListener("readystatechange", callback);
+            ajax.onreadystatechange = function () {
+                console.info(`Ready State Change ${ajax.readyState}`);
+            };
+            ajax.open("GET", "api/hello.json");
+            ajax.addEventListener("load", function () {
+                if (ajax.status === 200) {
+                    const json = JSON.parse(ajax.responseText);
+                    displayResponse(json);
+                } else {
+                    displayResponse({
+                        response: `Terjadi kesalahan dengan AJAX status ${ajax.status}`,
+                    });
+                }
+            });
+            ajax.send();
+
+            /**
+             * Ngide
+             */
+            const ajaxKonten = new XMLHttpRequest();
+            ajaxKonten.addEventListener("readystatechange", function () {
+                console.info(
+                    `ajaxKonten Ready State Change ${ajaxKonten.readyState}`
+                );
+            });
+            ajaxKonten.open("GET", "api/konten.json");
+            ajaxKonten.addEventListener("load", function () {
+                if (ajaxKonten.status === 200) {
+                    const json = JSON.parse(ajaxKonten.responseText);
+                    displayKonten(json);
+                } else {
+                    displayKontenError({
+                        response: `Terjadi kesalahan dengan AJAX status ${ajaxKonten.status}.`,
+                    });
+                }
+            });
+            ajaxKonten.send();
+        </script>
+    </body>
+</html>
