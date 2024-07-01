@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Menerima data di AJAX, JS Async</title>
+    </head>
+    <body>
+        <h1 id="response"></h1>
+        <p id="konten"></p>
+        <script>
+            /**
+             * Menerima data di ajax.
+             */
+            const ajax = new XMLHttpRequest();
+            ajax.open("GET", "api/hello.json");
+            ajax.addEventListener("load", function () {
+                const json = JSON.parse(ajax.responseText);
+
+                const header = document.getElementById("response");
+                header.textContent = json.response;
+                document.body.appendChild(header);
+            });
+            ajax.send();
+
+            const ajaxParagraph = new XMLHttpRequest();
+            ajaxParagraph.open("GET", "api/konten.json");
+            ajaxParagraph.addEventListener("load", function () {
+                const json = JSON.parse(ajaxParagraph.responseText);
+
+                const paragraph = document.getElementById("konten");
+                paragraph.textContent =
+                    json.data.konten1 +
+                    json.data.konten2 +
+                    json.data.konten3 +
+                    json.data.konten4;
+                document.body.appendChild(paragraph);
+            });
+            ajaxParagraph.send();
+        </script>
+    </body>
+</html>
