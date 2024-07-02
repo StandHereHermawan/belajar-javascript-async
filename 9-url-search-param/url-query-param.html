@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>AJAX kirim URL dengan Query Parameter, JS Async</title>
+    </head>
+    <body>
+        <!-- form>((label[for=username]{Username : }>input[type=text][id=username][name=username])+br+(label[for=password]{Password : }>input[type=password][id=password][name=password])+br+(input[type=button][id=login][value=login])) -->
+        <form>
+            <label for="search"
+                >Search : <input type="text" id="search" name="search" /></label
+            ><br /><input type="button" id="searchButton" value="search" />
+        </form>
+        <h1 id="response"></h1>
+    </body>
+    <script>
+        /**
+         * Mengirim data dengan AJAX
+         */
+        function doSearch() {
+            const ajax = new XMLHttpRequest();
+
+            const param = new URLSearchParams();
+            param.append("search", document.getElementById("search").value);
+            param.append("filter", document.getElementById("search").value);
+
+            ajax.open(
+                "GET",
+                `https://tests.free.beeceptor.com?${param.toString()}`
+            );
+            ajax.onload = function () {
+                console.info(ajax.responseText);
+
+                const response = document.getElementById("response");
+                response.innerText = ajax.responseText;
+            };
+            ajax.send();
+        }
+
+        document.getElementById("searchButton").onclick = doSearch;
+    </script>
+</html>
