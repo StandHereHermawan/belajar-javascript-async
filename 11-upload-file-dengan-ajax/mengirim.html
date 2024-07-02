@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mengirim data dengan AJAX kirim Form, JS Async</title>
+    </head>
+    <body>
+        <form>
+            <label for="username"
+                >Username :
+                <input type="text" id="username" name="username" /></label
+            ><br />
+            <label for="password"
+                >Name : <input type="text" id="name" name="name" /></label
+            ><br />
+            <label for="profilePict"
+                >Profile Pict :
+                <input type="file" id="profilePict" name="profilePict" /></label
+            ><br />
+            <input type="button" id="register" value="Register" />
+        </form>
+        <p id="response"></p>
+    </body>
+    <script>
+        /**
+         * Upload File dengan AJAX
+         */
+        function doLogin() {
+            const ajax = new XMLHttpRequest();
+            ajax.open("POST", "https://cobain.free.beeceptor.com");
+            ajax.onload = function () {
+                console.info(ajax.responseText);
+
+                const response = document.getElementById("response");
+                response.innerText = ajax.responseText;
+            };
+
+            // Upload File
+            const form = new FormData();
+            form.append("username", document.getElementById("username").value);
+            form.append("name", document.getElementById("name").value);
+
+            const files = document.getElementById("profilePict").files;
+            const firstFiles = files.item(0);
+
+            form.append("profilePict", firstFiles);
+
+            // Mengirim dalam bentuk string.
+            ajax.send(form);
+        }
+
+        document.getElementById("register").onclick = doLogin;
+    </script>
+</html>
