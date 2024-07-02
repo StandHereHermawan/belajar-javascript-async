@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mengirim data dengan AJAX kirim Form, JS Async</title>
+    </head>
+    <body>
+        <!-- form>((label[for=username]{Username : }>input[type=text][id=username][name=username])+br+(label[for=password]{Password : }>input[type=password][id=password][name=password])+br+(input[type=button][id=login][value=login])) -->
+        <form>
+            <label for="username"
+                >Username :
+                <input type="text" id="username" name="username" /></label
+            ><br />
+            <label for="password"
+                >Password :
+                <input type="password" id="password" name="password" /></label
+            ><br /><input type="button" id="login" value="login" />
+        </form>
+        <h1 id="response"></h1>
+    </body>
+    <script>
+        /**
+         * Mengirim data dengan AJAX
+         */
+        function doLogin() {
+            const ajax = new XMLHttpRequest();
+            ajax.open("POST", "https://tests.free.beeceptor.com");
+            ajax.onload = function () {
+                console.info(ajax.responseText);
+
+                const response = document.getElementById("response");
+                response.innerText = ajax.responseText;
+            };
+            ajax.setRequestHeader(
+                "Content-Type",
+                "application/x-www-form-urlencoded"
+            );
+
+            const form = new URLSearchParams();
+            form.append("username", document.getElementById("username").value);
+            form.append("password", document.getElementById("password").value);
+
+            // Mengirim dalam bentuk string.
+            ajax.send(form);
+        }
+
+        document.getElementById("login").onclick = doLogin;
+    </script>
+</html>
