@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Await keyword, JS Async</title>
+    </head>
+    <body>
+        <script>
+            function getProduct() {
+                return fetch("api/konten.json", {
+                    method: "GET",
+                }).then((response) => response.json());
+            }
+
+            async function getProductName() {
+                response = await getProduct();
+                return response.name;
+            }
+
+            getProductName().then((name) => console.info(name));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Async keyword, JS Async</title>
+    </head>
+    <body>
+        <script>
+            // return Promise<String>
+            function getNamePromise() {
+                return new Promise(function (resolve, reject) {
+                    resolve("Arief Resolve Promise function");
+                });
+            }
+
+            // return Promise<String>
+            async function getNameAsync() {
+                return "Arief Resolve Promise Keyword Async";
+            }
+
+            // return Promise<String>
+            function getNamePromiseInAsync() {
+                return new Promise(function (resolve, reject) {
+                    resolve("Arief Resolve Promise function in Async");
+                });
+            }
+
+            getNamePromise().then((name) => console.info(name));
+
+            getNameAsync().then((name) => console.info(name));
+
+            getNamePromiseInAsync().then((name) => console.info(name));
+        </script>
+    </body>
+</html>

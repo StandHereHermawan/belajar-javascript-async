@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Await keyword, JS Async</title>
+    </head>
+    <body>
+        <script>
+            // Promise<JSON konten>
+            function getProduct() {
+                const request = new Request("api/konten.json", {
+                    method: "GET",
+                });
+
+                const response = fetch(request);
+
+                return response.then((response) => response.json());
+            }
+
+            function getProductNamePromise() {
+                return new Promise(function (resolve, reject) {
+                    getProduct()
+                        .then((product) => resolve(product.name))
+                        .catch((error) => reject(error));
+                });
+            }
+
+            async function getProductNameAsync() {
+                const product = await getProduct();
+                return product.name;
+            }
+
+            getProductNamePromise().then((productName) =>
+                console.info(productName)
+            );
+
+            getProductNameAsync().then((productName) =>
+                console.info(productName)
+            );
+        </script>
+    </body>
+</html>
