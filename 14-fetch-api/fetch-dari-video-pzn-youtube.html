@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fetch API, JS Async</title>
+    </head>
+    <body>
+        <!-- form>((label[for=username]{Username : }>input[type=text][id=username][name=username])+br+(label[for=password]{Password : }>input[type=password][id=password][name=password])+br+(input[type=button][id=login][value=login])) -->
+        <form>
+            <label for="username"
+                >Username :
+                <input type="text" id="username" name="username" /></label
+            ><br />
+            <label for="password"
+                >Password :
+                <input type="password" id="password" name="password" /></label
+            ><br /><input type="button" id="login" value="login" />
+        </form>
+        <h1 id="response"></h1>
+        <script>
+            function doLogin() {
+                // Fetch API dengan object Request.
+                // Membuat Request sebagai parameter Fetch API.
+                const request = new Request(
+                    "https://cobakan.free.beeceptor.com/todos",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                            username: document.getElementById("username").value,
+                            password: document.getElementById("password").value,
+                        }),
+                    }
+                );
+
+                // Promise<Response>
+                const response = fetch(request);
+
+                response
+                    .then((response) => response.json())
+                    .then(function (json) {
+                        document.getElementById("response").textContent =
+                            json.title;
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                        document.getElementById("response").textContent = error;
+                    });
+            }
+
+            /* Response dari url: "https://cobakan.free.beeceptor.com/todos",
+
+            response: {
+                "id": 6,
+                "title": "Complete all the use-cases for faster API design and testing with Beeceptor.",
+                "completed": true
+            } */
+
+            document.getElementById("login").onclick = doLogin;
+        </script>
+    </body>
+</html>

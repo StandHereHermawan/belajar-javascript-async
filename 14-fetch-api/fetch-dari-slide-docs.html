@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Fetch API, JS Async</title>
+    </head>
+    <body>
+        <script>
+            // Fetch API dengan object Request.
+            {
+                // Membuat Request sebagai parameter Fetch API.
+                const request = new Request(
+                    "https://cobakan.free.beeceptor.com",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                            username: "hermawan",
+                            password: "rahasia",
+                        }),
+                    }
+                );
+
+                // Menggunakan Fetch API
+                const response = fetch(request);
+            }
+
+            // Fetch API tanpa object Request.
+            {
+                // Menggunakan Fetch API Tanpa Object Request.
+                const response = fetch("https://cobakan.free.beeceptor.com", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        accept: "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: "hermawan",
+                        password: "rahasia",
+                    }),
+                });
+            }
+        </script>
+    </body>
+</html>
