@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Promise Method, JS Async</title>
+    </head>
+    <body>
+        <!-- table>(tbody>(tr>td{Id : }+(td#id))+(tr>td{Name : }+(td#name))+(tr>td{Price : }+(td#price))) -->
+        <table>
+            <tbody>
+                <tr>
+                    <td>Id :</td>
+                    <td id="id"></td>
+                </tr>
+                <tr>
+                    <td>Name :</td>
+                    <td id="name"></td>
+                </tr>
+                <tr>
+                    <td>Price :</td>
+                    <td id="price"></td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            function getProduct(product) {
+                return new Promise(function (resolve, reject) {
+                    // AJAX
+                    const ajax = new XMLHttpRequest();
+                    ajax.open("GET", `api/${product}.json`);
+                    ajax.onload = function () {
+                        if (ajax.status === 200) {
+                            resolve(ajax.responseText);
+                            // console.info(ajax.responseText);
+                        } else {
+                            reject(
+                                `Error, Get product with Response: ${ajax.status}`
+                            );
+                        }
+                    };
+                    ajax.send();
+                });
+            }
+
+            // Promise Static Method any.
+            // Jika ada Promise pada array promise duluan fullfilled, promise yang fulfilled duluan akan diambil.
+            // Jika Promise pada array promise terjadi error, promise tetap berjalan dan mengambil promise yang fullfilled duluan.
+            {
+                const responses = Promise.any([
+                    getProduct("konten1"),
+                    getProduct("konten2"),
+                    getProduct("konten3"),
+                    getProduct("konten4"),
+                ]);
+
+                responses
+                    .then((values) => console.info(values))
+                    .catch((error) => console.error(error));
+            }
+
+            // Contoh Error.
+            {
+                const responses = Promise.any([
+                    getProduct("kontensalah"),
+                    getProduct("konten2"),
+                    getProduct("konten3"),
+                    getProduct("konten4"),
+                ]);
+
+                responses
+                    .then((values) => console.info(values))
+                    .catch((error) => console.error(error));
+            }
+        </script>
+    </body>
+</html>
